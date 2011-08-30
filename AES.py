@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 
-def set_key(master_key):
-    return 0
+class AES():
+    def __init__(self, master_key):
+        self.change_key(master_key)
 
-def encrypt(plaintext, round_keys):
-    return 0
+    def change_key(self, master_key):
+        return 0
 
-def decrypt(ciphertext, round_keys):
-    return 0
+    def encrypt(self, plaintext):
+        return 0
+
+    def decrypt(self, ciphertext):
+        return 0
 
 
 if __name__ == '__main__':
@@ -16,13 +20,13 @@ if __name__ == '__main__':
     # the ciphertext should be
     # 0x3925841d02dc09fbdc118597196a0b32
 
-    round_keys = set_key(master_key)
+    my_AES = AES(master_key)
 
-    encrypted = encrypt(plaintext, round_keys)
-    decrypted = decrypt(encrypted, round_keys)
+    encrypted = my_AES.encrypt(plaintext)
+    decrypted = my_AES.decrypt(encrypted)
 
     print 'plaintext:', hex(plaintext)
-    print 'master key:', hex(master_key)
+    print 'masterkey:', hex(master_key)
 
     print 'encrypted:', hex(encrypted)
     print 'decrypted:', hex(decrypted)
