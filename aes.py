@@ -63,7 +63,6 @@ class AES:
 
         # print self.round_keys
 
-
     def encrypt(self, plaintext):
         return 0
 
