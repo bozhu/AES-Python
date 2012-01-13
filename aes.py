@@ -85,7 +85,10 @@ def round_encrypt(state_matrix, key_matrix):
 
 
 def round_decrypt(state_matrix, key_matrix):
-    pass
+    add_round_key(state_matrix, key_matrix)
+    inv_mix_columns(state_matrix)
+    inv_shift_rows(state_matrix)
+    inv_sub_bytes(state_matrix)
 
 
 Rcon = (
@@ -161,14 +164,13 @@ class AES:
     def decrypt(self, ciphertext):
         self.cipher_state = text2matrix(ciphertext)
 
-        # the equivalent decryption algorithm in Sec 3.7.3 of The Design of Rijndeal
         add_round_key(self.cipher_state, self.round_keys[40:])
+        inv_shift_rows(self.cipher_state)
+        inv_sub_bytes(self.cipher_state)
 
         for i in range(9, 0, -1):
             round_decrypt(self.cipher_state, self.round_keys[4 * i : 4 * (i + 1)])
 
-        inv_sub_bytes(self.cipher_state)
-        inv_shift_rows(self.cipher_state)
         add_round_key(self.cipher_state, self.round_keys[:4])
 
         return matrix2text(self.cipher_state)
