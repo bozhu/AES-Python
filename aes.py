@@ -70,8 +70,18 @@ def inv_shift_rows(s):
 # learnt from http://cs.ucsb.edu/~koc/cs178/projects/JT/aes.c
 xtime = lambda a: (((a << 1) ^ 0x1B) & 0xFF) if (a & 0x80) else (a << 1)
 
+def mix_single_column(a):
+    # please see Sec 4.1.2 in The Design of Rijndael
+    t = a[0] ^ a[1] ^ a[2] ^ a[3]
+    u = a[0]
+    a[0] = a[0] ^ t ^ xtime(a[0] ^ a[1])
+    a[1] = a[1] ^ t ^ xtime(a[1] ^ a[2])
+    a[2] = a[2] ^ t ^ xtime(a[2] ^ a[3])
+    a[3] = a[3] ^ t ^ xtime(a[3] ^ u)
+
 def mix_columns(s):
-    pass
+    for i in range(4):
+        mix_single_column(s[i])
 
 def inv_mix_columns(s):
     pass
@@ -191,7 +201,11 @@ if __name__ == '__main__':
     print 'masterkey:', hex(master_key)
 
     print 'encrypted:', hex(encrypted)
-    print 'should be:', hex(0x3925841d02dc09fbdc118597196a0b32)
+    print 'should be:', hex(0x3925841d02dc09fbdc118597196a0b32),
+    if encrypted == 0x3925841d02dc09fbdc118597196a0b32:
+        print 'correct!'
+    else:
+        print 'wrong...'
 
     #print 'decrypted:', hex(decrypted)
     
