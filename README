@@ -1,4 +1,5 @@
 http://about.bozhu.me
 
 TODO:
-* maybe write a Python wrapper for C implementation of AES
+* add 192, 256 versions
+* maybe write a Python wrapper for C implementation of AES for efficiency
