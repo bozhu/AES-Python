@@ -1,5 +1,3 @@
-http://about.bozhu.me
-
 ### TODO
 
 * add 192, 256 versions
