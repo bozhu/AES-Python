@@ -1,8 +1,8 @@
+A pure Python implementation of [AES](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+
 ### TODO
 
-* add 192, 256 versions
-* maybe write a Python wrapper for C implementation of AES for efficiency
-
+* Add 192 and 256 bit versions
 
 ### License
 
